@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: crud-egress
+  #annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+    #kubernetes.io/ingress.class: "nginx"
+spec:
+  podSelector:
+    matchLabels:
+      app: pg-release-postgressql
+  policyTypes:
+  - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 10.0.0.0/24
+    - ports:
+        - protocol: TCP
+          port: 5432

@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-service-deployment
+spec:
+  replicas: 3
+  selector:                                 # pod selector
+    matchLabels:
+      app: app-pod               # pod label to select
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:                                 # pod template
+    metadata:
+      labels:
+        app: app-pod             # pod label (for selector / for service)
+    spec:
+      containers:
+        - image: irnsk/otus:work2
+          imagePullPolicy: Always           # образ загружается всегда
+          name: crud-service
+          env:
+            - name: port
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key:  port
+            - name: spring.datasource.url
+              #value: jdbc:postgresql://11.20.30.10:5432/postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: spring.datasource.url
+            - name: spring.datasource.username
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: spring.datasource.username
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: pg-release-postgresql
+                  key: postgres-password
+#                configMapKeyRef:
+#                  name: special-config
+#                  key:  spring.datasource.password
+          ports:
+            - containerPort: 1234
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 1234
+              path: /monitor/health/readiness
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 1234
+              path: /monitor/health/liveness
+            initialDelaySeconds: 10
+            periodSeconds: 5

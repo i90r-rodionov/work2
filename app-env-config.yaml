@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+  namespace: default
+data:
+  log_level: info
+  port: "1234"
+  spring.datasource.url: jdbc:postgresql://pg-release-postgresql.default.svc.cluster.local:5432/postgres
