@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   backoffLimit: 2
-  activeDeadlineSeconds: 60
+  activeDeadlineSeconds: 30
   template:
     spec:
       containers:
@@ -18,14 +18,12 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: host-volume
-
           env:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pg-release-postgresql
                   key: postgres-password
-              # value: HUz0AxU13T
           command: ["psql", "--host=pg-release-postgresql", "--username=postgres", "--dbname=postgres", "--port=5432", "--file=/data/dbinit.sql"]
       restartPolicy: Never
       volumes:

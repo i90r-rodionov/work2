@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "d:/tmp"
+    path: "host_mnt/d/tmp/data"
