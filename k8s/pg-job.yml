@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dbinit
+  namespace: default
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      containers:
+        - name: pg-release-postgresql-client
+          image: docker.io/bitnami/postgresql:14.1.0-debian-10-r80
+          tty: true
+          stdin: true
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /data
+              name: host-volume
+
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-release-postgresql
+                  key: postgres-password
+              # value: HUz0AxU13T
+          command: ["psql", "--host=pg-release-postgresql", "--username=postgres", "--dbname=postgres", "--port=5432", "--file=/data/schema.sql"]
+      restartPolicy: Never
+      volumes:
+        - name: host-volume
+          persistentVolumeClaim:
+            claimName: pvc-hostpath
+
