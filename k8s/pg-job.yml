@@ -13,11 +13,11 @@ spec:
           image: docker.io/bitnami/postgresql:14.1.0-debian-10-r80
           tty: true
           stdin: true
-          securityContext:
-            privileged: true
-          volumeMounts:
-            - mountPath: /data
-              name: host-volume
+#          securityContext:
+#            privileged: true
+#          volumeMounts:
+#            - mountPath: /data
+#              name: host-volume
           env:
             - name: PGPASSWORD
               valueFrom:
@@ -26,8 +26,8 @@ spec:
                   key: postgres-password
           command: ["psql", "--host=pg-release-postgresql", "--username=postgres", "--dbname=postgres", "--port=5432", "--file=/data/dbinit.sql"]
       restartPolicy: Never
-      volumes:
-        - name: host-volume
-          persistentVolumeClaim:
-            claimName: pvc-hostpath
+#      volumes:
+#        - name: host-volume
+#          persistentVolumeClaim:
+#            claimName: pvc-hostpath
 
