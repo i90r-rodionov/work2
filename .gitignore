@@ -21,6 +21,7 @@ vcs.xml
 *.class
 
 # Log file
+/logs/
 *.log
 logFile*.*
 http*.http
