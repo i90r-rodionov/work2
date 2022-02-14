@@ -5,7 +5,7 @@
 - helm install pg-release bitnami/postgresql
 - init db script: *\data\dbinit.sql*
 
-*Read more about the installation in the [PostgreSQL packaged by Bitnami Chart Github repository]*
+Read more about the installation in the [PostgreSQL packaged by Bitnami Chart Github repository]
 
 ### Манифесты k8s
 - *\k8s*
