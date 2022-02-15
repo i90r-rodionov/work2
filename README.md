@@ -8,15 +8,17 @@
 *Read more about the installation in the [PostgreSQL packaged by Bitnami Chart Github repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql/#installing-the-chart)*
 
 ### Манифесты k8s
+#### Job для миграции БД
+- *\k8s\host-pv.yaml*
+- *\k8s\host-pvc.yaml*
+- *\k8s\pg-job.yaml*
+#### Приложение
 - *\k8s\app-env-config.yaml*
 - *\k8s\app-spec-config.yaml*
 - *\k8s\app-deployment.yaml*
 - *\k8s\app-service.yaml*
 - *\k8s\app-ingress.yaml*
 - *\k8s\app-egress.yaml*
-- *\k8s\host-pv.yaml*
-- *\k8s\host-pvc.yaml*
-- *\k8s\pg-job.yaml*
 
 
 ### Коллекция postman
