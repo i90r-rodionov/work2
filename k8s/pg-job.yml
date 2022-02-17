@@ -10,7 +10,8 @@ spec:
     spec:
       containers:
         - name: pg-release-postgresql-client
-          image: docker.io/bitnami/postgresql:14.1.0-debian-10-r80
+          #image: docker.io/bitnami/postgresql:14.1.0-debian-10-r80
+          image: irnsk/otus:work2db
           tty: true
           stdin: true
 #          securityContext:
@@ -24,7 +25,7 @@ spec:
                 secretKeyRef:
                   name: pg-release-postgresql
                   key: postgres-password
-          command: ["psql", "--host=pg-release-postgresql", "--username=postgres", "--dbname=postgres", "--port=5432", "--file=/data/dbinit.sql"]
+          command: ["psql", "--host=pg-release-postgresql", "--username=postgres", "--dbname=postgres", "--port=5432", "--file=dbinit.sql"]
       restartPolicy: Never
 #      volumes:
 #        - name: host-volume
