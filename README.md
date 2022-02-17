@@ -1,9 +1,9 @@
 ## Домашнее задание по курсу Otus ["Microservice Architecture"](https://otus.ru/lessons/microservice-architecture/?int_source=courses_catalog&int_term=programming)
 
 ### Установка db postgres
-- helm repo add bitnami https://charts.bitnami.com/bitnami
-- helm install pg-release bitnami/postgresql
-- init db script: *\data\dbinit.sql*
+`helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install pg-release bitnami/postgresql`
+init db script: *\data\dbinit.sql*
 
 *Read more about the installation in the [PostgreSQL packaged by Bitnami Chart Github repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql/#installing-the-chart)*
 
